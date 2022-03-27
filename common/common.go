@@ -1,5 +1,5 @@
 package common
 
 const (
-	ServName = "test_srv"
+	ServName = "grpc_demo_srv"
 )

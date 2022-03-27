@@ -30,7 +30,7 @@ func NewResolver(endpoints []string, service string) resolver.Builder {
 
 // Scheme return etcd schema
 func (r *Resolver) Scheme() string {
-	return schema + "_" + r.service
+	return schema
 }
 
 // ResolveNow
@@ -69,7 +69,9 @@ func (r *Resolver) watch(prefix string) {
 			addrList = append(addrList, v)
 		}
 		//r.cc.NewAddress(addrList)
-		r.cc.UpdateState(resolver.State{Addresses: addrList})
+		if err := r.cc.UpdateState(resolver.State{Addresses: addrList}); err != nil {
+			log.Printf("grpclb: update resolver state failed: %s", err.Error())
+		}
 	}
 
 	resp, err := r.cli.Get(context.Background(), prefix, clientv3.WithPrefix())
