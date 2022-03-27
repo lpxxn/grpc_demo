@@ -6,7 +6,6 @@ import (
 	"io"
 	"log"
 	"math/rand"
-	"time"
 
 	"github.com/Pallinder/go-randomdata"
 	"github.com/golang/protobuf/ptypes/empty"
@@ -23,8 +22,6 @@ func (srv *StudentSrv) NewStudent(ctx context.Context, s *model.Student) (*proto
 	if s != nil {
 		srv.StudentList = append(srv.StudentList, s)
 	}
-	//time.Sleep(time.Hour)
-	time.Sleep(time.Second * 20)
 	if err := checkCtx(ctx); err != nil {
 		return &protos.Result{
 			Code: "false",

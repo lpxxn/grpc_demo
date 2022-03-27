@@ -29,17 +29,17 @@ func main() {
 	}
 	defer conn.Close()
 	c := api.NewStudentSrvClient(conn)
-	for i := 0; i < 1; i++ {
-		student := &model.Student{
-			Id:   rand.Int63(),
-			Name: randomdata.FullName(randomdata.RandomGender) + randomdata.City(),
-			//Name: name,
-			Age: rand.Int31n(30),
-		}
-		r, err := c.NewStudent(context.Background(), student)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Println("add student ", r.Code)
+	student := &model.Student{
+		Id:   rand.Int63(),
+		Name: randomdata.FullName(randomdata.RandomGender) + randomdata.City(),
+		//Name: name,
+		Age: rand.Int31n(30),
 	}
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
+	defer cancel()
+	r, err := c.NewStudent(ctx, student)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("add student ", r.Code)
 }
