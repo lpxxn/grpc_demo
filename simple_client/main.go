@@ -30,10 +30,10 @@ func main() {
 	defer conn.Close()
 	c := api.NewStudentSrvClient(conn)
 	student := &model.Student{
-		Id: rand.Int63(),
-		//Name: randomdata.FullName(randomdata.RandomGender) + randomdata.City(),
-		Value: randomdata.FullName(randomdata.RandomGender) + randomdata.City(),
-		Age:   rand.Int31n(30),
+		Id:   rand.Int63(),
+		Name: randomdata.FullName(randomdata.RandomGender) + randomdata.City(),
+		//Value: randomdata.FullName(randomdata.RandomGender) + randomdata.City(),
+		Age: rand.Int31n(30),
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
 	defer cancel()

@@ -30,10 +30,10 @@ func main() {
 
 	grpcServer := grpc.NewServer(WithInterceptor()...)
 	api.RegisterStudentSrvServer(grpcServer, &common.StudentSrv{StudentList: []*model.Student{
-		//&model.Student{Id: 1, Name: "tom", Age: 5},
-		//&model.Student{Id: 2, Name: "jerry", Age: 6},
-		&model.Student{Id: 1, Value: "tom", Age: 5},
-		&model.Student{Id: 2, Value: "jerry", Age: 6},
+		&model.Student{Id: 1, Name: "tom", Age: 5},
+		&model.Student{Id: 2, Name: "jerry", Age: 6},
+		//&model.Student{Id: 1, Value: "tom", Age: 5},
+		//&model.Student{Id: 2, Value: "jerry", Age: 6},
 	}})
 	fmt.Println("serv running...")
 	if err := grpcServer.Serve(listen); err != nil {
