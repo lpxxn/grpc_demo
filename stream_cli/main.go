@@ -84,8 +84,10 @@ func revStudentInfo(c api.StudentSrvClient) {
 			panic(err)
 		}
 	}
-	send(1)
-	send(2)
+	for i := 0; i < 10; i++ {
+		send(int64(i))
+		time.Sleep(time.Duration(rand.Intn(3)) * time.Second)
+	}
 	stream.CloseSend()
 	w.Wait()
 }

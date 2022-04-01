@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"math/rand"
+	"time"
 
 	"github.com/Pallinder/go-randomdata"
 	"github.com/golang/protobuf/ptypes/empty"
@@ -52,7 +53,7 @@ func (srv *StudentSrv) StudentByID(context.Context, *api.QueryStudent) (*api.Que
 }
 
 func (srv *StudentSrv) AllStudent(e *empty.Empty, rev api.StudentSrv_AllStudentServer) error {
-	const limit = 10
+	const limit = 2
 	data := &api.QueryStudentResponse{}
 	curr := srv.StudentList
 	for _, item := range curr {
@@ -78,12 +79,13 @@ func (srv *StudentSrv) StudentInfo(stream api.StudentSrv_StudentInfoServer) erro
 		if err == io.EOF {
 			return nil
 		}
-		fmt.Printf("get id: %d", in.Id)
+		fmt.Printf("get id: %d\n", in.Id)
 		if l == 0 {
 			fmt.Println("data is empty")
 			return nil
 		}
 		if l > 0 {
+			time.Sleep(time.Duration(rand.Intn(3)) * time.Second)
 			stream.Send(&api.QueryStudentResponse{StudentList: srv.StudentList[0:rand.Intn(l)]})
 		}
 	}

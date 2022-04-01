@@ -1,9 +1,7 @@
 syntax = "proto3";
 package model;
-option go_package = "protos/model";
+option go_package = "github.com/lpxxn/grpc_demo/protos/model";
 option java_package = "com.proto.model";
-
-//import "protos/common.proto";
 
 message Student {
   int64 id = 1;
