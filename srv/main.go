@@ -14,6 +14,7 @@ import (
 	"github.com/lpxxn/grpc_demo/common"
 	"github.com/lpxxn/grpc_demo/protos/api"
 	"github.com/lpxxn/grpc_demo/protos/model"
+	"google.golang.org/grpc/reflection"
 )
 
 var port int
@@ -35,6 +36,8 @@ func main() {
 		//&model.Student{Id: 1, Value: "tom", Age: 5},
 		//&model.Student{Id: 2, Value: "jerry", Age: 6},
 	}})
+	// 生产环境就不要注册了
+	reflection.Register(grpcServer)
 	fmt.Println("serv running...")
 	if err := grpcServer.Serve(listen); err != nil {
 		panic(err)

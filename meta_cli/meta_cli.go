@@ -12,6 +12,7 @@ import (
 	"github.com/lpxxn/grpc_demo/protos/api"
 	"github.com/lpxxn/grpc_demo/protos/model"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
 )
 
 var port int
@@ -31,15 +32,26 @@ func main() {
 	student := &model.Student{
 		Id:   rand.Int63(),
 		Name: randomdata.FullName(randomdata.RandomGender) + randomdata.City(),
-		//Value: randomdata.FullName(randomdata.RandomGender) + randomdata.City(),
-		Age: rand.Int31n(30),
+		Age:  rand.Int31n(30),
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*2)
 	defer cancel()
 
-	r, err := c.NewStudent(ctx, student)
+	md := metadata.New(map[string]string{
+		"user": "abc",
+	})
+	// 使用Pairs
+	md2 := metadata.Pairs("k", "v", "k2", "v2")
+	md = metadata.Join(md, md2)
+	ctx = metadata.NewOutgoingContext(ctx, md)
+	ctx = metadata.AppendToOutgoingContext(ctx, "k3", "v3")
+
+	revHeader := metadata.MD{}
+	revTrailer := metadata.MD{}
+	r, err := c.NewStudent(ctx, student, grpc.Header(&revHeader), grpc.Trailer(&revTrailer))
+
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("add student ", r.Code)
+	fmt.Println("add student ", r.Code, revHeader, revTrailer)
 }
