@@ -15,16 +15,17 @@ import (
 )
 
 func main() {
-	ip, err := common.PrivateIPv4()
-	if err != nil {
-		panic(err)
-	}
+	//ip, err := common.PrivateIPv4()
+	//if err != nil {
+	//	panic(err)
+	//}
 
 	listener, err := net.Listen("tcp", ":0")
 	if err != nil {
 		panic(err)
 	}
-	addr := fmt.Sprintf("%s:%d", ip.String(), listener.Addr().(*net.TCPAddr).Port)
+	//addr := fmt.Sprintf("%s:%d", ip.String(), listener.Addr().(*net.TCPAddr).Port)
+	addr := fmt.Sprintf("127.0.0.1:%d", listener.Addr().(*net.TCPAddr).Port)
 	fmt.Println(addr)
 
 	s := grpc.NewServer([]grpc.ServerOption{
