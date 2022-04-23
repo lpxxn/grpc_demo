@@ -27,7 +27,7 @@ func main() {
 	}
 	client := api.NewStudentSrvClient(conn)
 
-	for i := 0; i < 20; i++ {
+	for i := 0; i < 50; i++ {
 		rev, err := client.StudentByID(context.Background(), &api.QueryStudent{})
 		if err != nil {
 			panic(err)

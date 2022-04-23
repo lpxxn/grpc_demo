@@ -64,7 +64,7 @@ func (service *Service) Start() (err error) {
 				return service.revoke()
 			}
 			_ = resp
-			log.Printf("Recv reply from service: %s, ttl:%d", service.getKey(), resp.TTL)
+			//log.Printf("Recv reply from service: %s, ttl:%d", service.getKey(), resp.TTL)
 		}
 	}
 
