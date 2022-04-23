@@ -22,14 +22,16 @@ type StudentSrv struct{ StudentList []*model.Student }
 
 func (srv *StudentSrv) NewStudent(ctx context.Context, s *model.Student) (*protos.Result, error) {
 	log.Println("new student in")
-	if meta, ok := metadata.FromIncomingContext(ctx); ok {
-		log.Println(meta)
-		log.Println("user:", meta.Get("user"))
+	{
+		if meta, ok := metadata.FromIncomingContext(ctx); ok {
+			log.Println(meta)
+			log.Println("user:", meta.Get("user"))
+		}
+		header := metadata.Pairs("header", "headerVal")
+		grpc.SendHeader(ctx, header)
+		trailer := metadata.Pairs("trailer", "trailerVal")
+		grpc.SetTrailer(ctx, trailer)
 	}
-	header := metadata.Pairs("header", "headerVal")
-	grpc.SendHeader(ctx, header)
-	trailer := metadata.Pairs("trailer", "trailerVal")
-	grpc.SetTrailer(ctx, trailer)
 	if s != nil {
 		srv.StudentList = append(srv.StudentList, s)
 	}
