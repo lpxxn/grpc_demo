@@ -18,10 +18,13 @@ import (
 	"github.com/lpxxn/grpc_demo/protos/model"
 )
 
-type StudentSrv struct{ StudentList []*model.Student }
+type StudentSrv struct {
+	StudentList []*model.Student
+	Version     string
+}
 
 func (srv *StudentSrv) NewStudent(ctx context.Context, s *model.Student) (*protos.Result, error) {
-	log.Println("new student in")
+	log.Println("new student in", srv.Version)
 	{
 		if meta, ok := metadata.FromIncomingContext(ctx); ok {
 			log.Println(meta)

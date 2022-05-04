@@ -42,6 +42,7 @@ func TestStudent2(t *testing.T) {
 		t.Fatal(err)
 	}
 	t.Logf("%b", sBody)
+	t.Logf("padding zero: %08b", sBody)
 	t.Logf("%d", sBody)
 	t.Log(string(sBody))
 	jBody, _ := json.Marshal(s1)

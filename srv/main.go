@@ -12,6 +12,7 @@ import (
 	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 
 	"github.com/lpxxn/grpc_demo/common"
+	_ "github.com/lpxxn/grpc_demo/mycodec"
 	"github.com/lpxxn/grpc_demo/protos/api"
 	"github.com/lpxxn/grpc_demo/protos/model"
 	"google.golang.org/grpc/reflection"
@@ -31,11 +32,11 @@ func main() {
 
 	grpcServer := grpc.NewServer(WithInterceptor()...)
 	api.RegisterStudentSrvServer(grpcServer, &common.StudentSrv{StudentList: []*model.Student{
-		&model.Student{Id: 1, Name: "tom", Age: 5},
-		&model.Student{Id: 2, Name: "jerry", Age: 6},
+		&model.Student{Id: 1, Value: "tom", Age: 5},
+		&model.Student{Id: 2, Value: "jerry", Age: 6},
 		//&model.Student{Id: 1, Value: "tom", Age: 5},
 		//&model.Student{Id: 2, Value: "jerry", Age: 6},
-	}})
+	}, Version: "simple srv"})
 	// 生产环境就不要注册了
 	reflection.Register(grpcServer)
 	fmt.Println("serv running...")

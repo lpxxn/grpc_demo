@@ -5,7 +5,7 @@ option java_package = "com.proto.model";
 
 message Student {
   int64 id = 1;
-  string name = 2;
+  string value = 2;
   int32 age = 3;
 }
 
@@ -15,5 +15,3 @@ message StudentList {
   string teacher = 3;
   repeated int64 score = 4;
 }
-
-//protos.Result a = 4;

@@ -1,0 +1,40 @@
+
+›
+protos/common.protoprotos"D
+Result
+code (	Rcode
+desc (	Rdesc
+data (RdataB.
+	com.protoZ!github.com/lpxxn/grpc_demo/protosbproto3
+¬
+protos/model/students.protomodel"A
+Student
+id (Rid
+value (	Rvalue
+age (Rage"
+StudentList
+class (	Rclass*
+students (2.model.StudentRstudents
+teacher (	Rteacher
+score (RscoreB:
+com.proto.modelZ'github.com/lpxxn/grpc_demo/protos/modelbproto3
+·
+google/protobuf/empty.protogoogle.protobuf"
+EmptyBv
+com.google.protobufB
+EmptyProtoPZ'github.com/golang/protobuf/ptypes/emptyø¢GPBªGoogle.Protobuf.WellKnownTypesbproto3
+š
+protos/api/student_api.protoapiprotos/common.protoprotos/model/students.protogoogle/protobuf/empty.proto"
+QueryStudent
+id (Rid"H
+QueryStudentResponse0
+studentList (2.model.StudentRstudentList2û
+
+StudentSrv,
+
+NewStudent.model.Student.protos.Result;
+StudentByID.api.QueryStudent.api.QueryStudentResponseA
+
+AllStudent.google.protobuf.Empty.api.QueryStudentResponse0?
+StudentInfo.api.QueryStudent.api.QueryStudentResponse(0B6
+com.proto.apiZ%github.com/lpxxn/grpc_demo/protos/apibproto3
