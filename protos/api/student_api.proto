@@ -13,6 +13,7 @@ service StudentSrv {
   rpc StudentByID(QueryStudent) returns (QueryStudentResponse);
 
   rpc AllStudent(google.protobuf.Empty) returns(stream QueryStudentResponse);
+  rpc QueryStudents(QueryStudent) returns(stream QueryStudentResponse);
   rpc StudentInfo(stream QueryStudent) returns(stream QueryStudentResponse);
 }
 

@@ -106,3 +106,8 @@ func (srv *StudentSrv) StudentInfo(stream api.StudentSrv_StudentInfoServer) erro
 	}
 	return nil
 }
+
+func (srv *StudentSrv) QueryStudents(student *api.QueryStudent, server api.StudentSrv_QueryStudentsServer) error {
+	//TODO implement me
+	panic("implement me")
+}
